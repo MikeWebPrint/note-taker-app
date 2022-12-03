@@ -33,13 +33,12 @@ router.post('/', (req, res) => {
 
 // delete a note
 router.delete('/:id', (req, res) => {
+  if (notes.some(note => note.id === req.params.id)) {
     console.log('Original note list: ' + JSON.stringify(notes, null, 2));
     const newNoteList = notes.filter(note => note.id !== req.params.id);
     console.log('New note list: ' + JSON.stringify(newNoteList, null, 2));
     writeToFile('./db/db.json', newNoteList);
-  if (notes) {
-    // writeToFile(notes, parsedData);
-    res.json(notes.filter(note => note.id !== req.params.id));
+    res.json({notes: newNoteList, msg: `note with id: ${req.params.id} deleted`});
 
   } else {
     res.status(400).json({msg: 'This note does not exist'});
