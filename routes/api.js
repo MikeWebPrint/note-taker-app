@@ -3,10 +3,12 @@ const router = express.Router();
 const notes = require('../db/db.json');
 const uuid = require('uuid');
 const fs = require('fs');
+const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
 
 // get notes
 router.get('/', (req, res) => {
-  res.json(notes);
+  // res.json(notes);
+  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 // add a note
 router.post('/', (req, res) => {
@@ -24,6 +26,33 @@ router.post('/', (req, res) => {
   fs.appendFileSync('notes', addNote(newNote), {encoding: 'utf-8',flag: 'w' });
   res.json(notes);
 });
+
+
+
+
+router.post('/', (req, res) => {
+  console.info(`${req.method} request received to add a tip`);
+  console.log(req.body);
+
+  const { id, title, text } = req.body;
+
+  if (req.body) {
+    const newNote = {
+      id: uuid(),
+      title,
+      text,
+    };
+
+    readAndAppend(newNote, './db/db.json');
+    res.json(`Note added successfully 🚀`);
+  } else {
+    res.error('Error in adding note');
+  }
+});
+
+
+
+
 
 
 // change a note
