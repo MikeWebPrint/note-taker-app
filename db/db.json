@@ -1,6 +1,11 @@
 [
-  {
-  "title": "Test",
-  "text": "text"
-}
+    {
+        "title": "Test",
+        "text": "text"
+    },
+    {
+        "id": "2e38a7ae-2dea-410f-b147-5469c9cdf9c8",
+        "title": "A new hope",
+        "text": "Where have all the flowers gone?"
+    }
 ]

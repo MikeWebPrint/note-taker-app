@@ -11,21 +11,21 @@ router.get('/', (req, res) => {
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 // add a note
-router.post('/', (req, res) => {
-  const newNote = {
-    id: uuid.v4(),
-    title: req.body.title,
-    text: req.body.text
-  }
+// router.post('/', (req, res) => {
+//   const newNote = {
+//     id: uuid.v4(),
+//     title: req.body.title,
+//     text: req.body.text
+//   }
 
-  if (!newNote.title || !newNote.text) {
-    return res.status(400).json({msg: 'Please give your note a title and text'});
-  }
-  const noteList = JSON.parse(notes);
-  const addNote = newNote => noteList.push(newNote)
-  fs.appendFileSync('notes', addNote(newNote), {encoding: 'utf-8',flag: 'w' });
-  res.json(notes);
-});
+//   if (!newNote.title || !newNote.text) {
+//     return res.status(400).json({msg: 'Please give your note a title and text'});
+//   }
+//   const noteList = JSON.parse(notes);
+//   const addNote = newNote => noteList.push(newNote)
+//   fs.appendFileSync('notes', addNote(newNote), {encoding: 'utf-8',flag: 'w' });
+//   res.json(notes);
+// });
 
 
 
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
 
   if (req.body) {
     const newNote = {
-      id: uuid(),
+      id: uuid.v4(),
       title,
       text,
     };
