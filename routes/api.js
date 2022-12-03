@@ -19,10 +19,12 @@ router.post('/', (req, res) => {
   if (!newNote.title || !newNote.text) {
     return res.status(400).json({msg: 'Please give your note a title and text'});
   }
-
-  notes.push(newNote);
+  const noteList = JSON.parse(notes);
+  const addNote = newNote => noteList.push(newNote)
+  fs.appendFileSync('notes', addNote(newNote), {encoding: 'utf-8',flag: 'w' });
   res.json(notes);
 });
+
 
 // change a note
 router.put('/:id', (req, res) => {
@@ -34,7 +36,7 @@ router.put('/:id', (req, res) => {
       if (note.id === req.params.id){
         note.title = updNote.title ? updNote.title : note.title;
         note.text = updNote.text ? updNote.text : note.text;
-        res.json({msg: 'Note updated', note})
+        res.json( note).json({msg: 'Note updated'})
       }
     });
   } else {
