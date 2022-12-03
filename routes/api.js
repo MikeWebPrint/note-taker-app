@@ -38,7 +38,7 @@ router.delete('/:id', (req, res) => {
     const newNoteList = notes.filter(note => note.id !== req.params.id);
     console.log('New note list: ' + JSON.stringify(newNoteList, null, 2));
     writeToFile('./db/db.json', newNoteList);
-    res.json({notes: newNoteList, msg: `note with id: ${req.params.id} deleted`});
+    res.json(notes);
 
   } else {
     res.status(400).json({msg: 'This note does not exist'});
