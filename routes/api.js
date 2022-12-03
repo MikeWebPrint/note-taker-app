@@ -39,7 +39,7 @@ router.delete('/:id', (req, res) => {
     writeToFile('./db/db.json', newNoteList);
   if (notes) {
     // writeToFile(notes, parsedData);
-    res.json({notes: notes.filter(note => note.id !== req.params.id), msg: `note with id ${req.params.id} deleted`});
+    res.json(notes.filter(note => note.id !== req.params.id));
 
   } else {
     res.status(400).json({msg: 'This note does not exist'});
