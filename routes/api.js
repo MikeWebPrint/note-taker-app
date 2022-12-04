@@ -45,4 +45,19 @@ router.delete('/:id', (req, res) => {
   // }
 });
 
+// deleteOneNote = (notes, id) => {
+//   const notesList = require('../db/db.json');
+//   const newNoteList = notesList.filter(note => note.id !== id);
+//   writeToFile('./db/db.json', newNoteList);
+//   return newNoteList;
+// }
+
+
+// // example code
+// router.delete('/:id', (req, res) => {
+//   // t=havent hecked this delete func code
+//   deleteOneNote(req.params.id)
+//   .then(() => res.json({ ok: true }))
+//   .catch((err) => res.status(500).json(err))
+// })
 module.exports = router;
